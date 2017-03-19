@@ -38,6 +38,16 @@
             <artifactId>jsp-api</artifactId>
             <version>2.2</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+         <!--   Впомним Maven, раз библиотека есть в TomCat? предполагается что она будет
+            provide-ится (предоставлятся Servlet-Container-ом) (в той среде, в которой будет
+            запускаться наше приложение)(Эту библиотеку предоставит тот кто будет запускать наше приложение).
+            Это позволит не добавлять библиотеку в финальный WAR-ник-->
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 </project>

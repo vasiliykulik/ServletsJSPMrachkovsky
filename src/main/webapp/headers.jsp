@@ -1,14 +1,10 @@
-<%@ page import="java.util.Enumeration" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Vasiliy Kylik
   Date: 19.03.2017
   Time: 22:54
 --%>
-<%--JSP директивы, позволяют добавлять в HTML
-1. content type
-2. объявить язык который будет внутри использоваться
-3. <%%> - скриплет, а JSP - по сути servlet - и у него есть доступ к объектам:
- request, response, Writer--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -21,17 +17,16 @@
         <th>Header Name</th>
         <th>Header Value(s)</th>
     </tr>
-<%--    Пройдемся по списку, получим все header-ы из нашего request и запишем в табличку--%>
-    <%
-        /*типизированный по String*/
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()){
-          String headerName = headerNames.nextElement();
-          String headerValue = request.getHeader(headerName);
-          out.print("<tr><td>" + headerName + "</td>\n");
-          out.println("<td>" + headerValue + "</td></tr>\n");
-        }
-    %>
+    <%--    Пройдемся по списку, получим все header-ы из нашего request и запишем в табличку--%>
+    <%--for(String s:list) = items (это как list), var (это как s).
+    Мы итерируемся по Set-у ключей.
+    ${} - Expression Langugage}--%>
+    <c:forEach items="${header.keySet()}" var="headerName">
+        <tr>
+            <td><c:out value="${headerName}"/></td>
+            <td><c:out value="${header.get(headerName)}"/></td>
+        </tr>
+    </c:forEach>
 </table>
 </body>
 </html>
